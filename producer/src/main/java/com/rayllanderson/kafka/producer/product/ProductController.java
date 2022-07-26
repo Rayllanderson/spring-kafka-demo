@@ -1,5 +1,6 @@
 package com.rayllanderson.kafka.producer.product;
 
+import com.rayllanderson.kafka.producer.kafka.producer.KafkaProducer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final KafkaProducer producer;
+    private final KafkaProducer<Product> producer;
 
-    public ProductController(KafkaProducer producer) {
+    public ProductController(KafkaProducer<Product> producer) {
         this.producer = producer;
     }
 
