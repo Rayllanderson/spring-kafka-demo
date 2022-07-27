@@ -35,7 +35,7 @@ services:
     ports:
       - "9021:9021"
     environment:
-      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'kafka:9092'
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'host.docker.internal:9094'
       CONTROL_CENTER_REPLICATION_FACTOR: 1
       CONTROL_CENTER_CONNECT_CLUSTER: http://kafka-connect:8083
       PORT: 9021
@@ -50,7 +50,7 @@ services:
     depends_on:
       - kafka
     command: "bash -c 'echo Waiting for Kafka to be ready... && \
-                               cub kafka-ready -b kafka:9092 1 20 && \
+                               cub kafka-ready -b host.docker.internal:9094 1 20 && \
                                kafka-topics --create --if-not-exists --zookeeper zookeeper:2181 --partitions 3 --replication-factor 1 --topic product-topic'"
     environment:
       # The following settings are listed here only to satisfy the image's requirements.
