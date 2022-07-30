@@ -1,11 +1,10 @@
 package com.rayllanderson.kafka.producer.product;
 
+import com.rayllanderson.kafka.Product;
 import com.rayllanderson.kafka.producer.kafka.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaFailureCallback;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -38,7 +37,7 @@ public class ProductProducer implements KafkaProducer<Product> {
     }
 
     private ProducerRecord<String, Product> buildProducerRecord(Product product) {
-        var producerRecord = new ProducerRecord<>(topic, null, Instant.now().toEpochMilli(), product.getId(), product);
+        var producerRecord = new ProducerRecord<>(topic, null, Instant.now().toEpochMilli(), String.valueOf(product.getId()), product);
         producerRecord.headers().add(KafkaHeaders.CORRELATION_ID, UUID.randomUUID().toString().getBytes(StandardCharsets.UTF_8));
         return producerRecord;
     }

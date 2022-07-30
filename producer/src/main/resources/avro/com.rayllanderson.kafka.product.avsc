@@ -1,0 +1,12 @@
+{
+  "namespace": "com.rayllanderson.kafka",
+  "type": "record",
+  "name": "Product",
+  "fields": [
+    { "name": "id", "type": "string"},
+    { "name": "name", "type": "string"},
+    { "name": "price", "type": "double"},
+    { "name": "quantity", "type": "int"},
+    { "name": "weight", "type": ["double", "null"], "default": null }
+  ]
+}
