@@ -17,3 +17,6 @@ spring:
     product:
       topic:
         name: product-topic
+    payment:
+      topic:
+        name: payment-topic
