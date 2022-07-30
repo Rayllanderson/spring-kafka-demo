@@ -1,5 +1,8 @@
 package com.rayllanderson.kafka.producer.kafka.producer;
 
-public interface KafkaProducer<T> {
-    void send(T t);
+import org.apache.avro.specific.SpecificRecord;
+import org.apache.kafka.clients.producer.ProducerRecord;
+
+public interface KafkaProducer {
+    void publish(ProducerRecord<String, SpecificRecord> producerRecord);
 }

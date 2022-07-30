@@ -1,7 +1,6 @@
 package com.rayllanderson.kafka.producer.product;
 
 import com.rayllanderson.kafka.Product;
-import com.rayllanderson.kafka.producer.kafka.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final KafkaProducer<Product> producer;
+    private final ProductService productService;
     private static final String CORRELATION_ID_HEADER = "Correlation-Id";
 
     @PostMapping
     public ResponseEntity<Void> publish(@RequestBody ProductRequest request) {
         Product product = request.buildToAvro();
-        producer.send(product);
+        productService.process(product);
         return ResponseEntity.status(HttpStatus.CREATED).header(CORRELATION_ID_HEADER, (String) product.getId()).build();
     }
 }
