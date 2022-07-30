@@ -1,4 +1,4 @@
-package com.rayllanderson.kafka.consumer.product;
+package com.rayllanderson.kafka.consumer.product.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +19,7 @@ public class Product {
     @Id
     private String id;
     private String name;
-    private BigDecimal value;
+    private BigDecimal price;
     private Integer quantity;
+    private BigDecimal weight;
 }

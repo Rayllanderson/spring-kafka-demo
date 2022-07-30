@@ -1,5 +1,6 @@
 package com.rayllanderson.kafka.consumer.product;
 
+import com.rayllanderson.kafka.consumer.product.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
