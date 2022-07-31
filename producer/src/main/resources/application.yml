@@ -11,9 +11,8 @@ spring:
       schema:
         registry:
           url: ${SCHEMA_REGISTRY_URL:http://localhost:8081}
-      auto:
-        register:
-          schemas: true
+      auto.register.schemas: false
+      use.latest.version: true
     product:
       topic:
         name: product-topic
