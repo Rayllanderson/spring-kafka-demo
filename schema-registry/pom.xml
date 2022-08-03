@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.rayllanderson.kafka</groupId>
+    <artifactId>schema-registry</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Schema-Registry</name>
+    <description>Responsável por registrar os Avros no Schema Registry</description>
+    <properties>
+        <confluent.version>6.1.0</confluent.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-streams-avro-serde</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-schema-registry-client</artifactId>
+            <version>${confluent.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>confluent</id>
+            <url>https://packages.confluent.io/maven/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.confluent</groupId>
+                <artifactId>kafka-schema-registry-maven-plugin</artifactId>
+                <version>${confluent.version}</version>
+                <configuration>
+                    <schemaRegistryUrls>
+                        <param>${schema-registry-url}</param>
+                    </schemaRegistryUrls>
+                    <subjects>
+                        <payment-topic-value>${project.basedir}/avro/Payment.avcs</payment-topic-value>
+                        <product-topic-value>${project.basedir}/avro/com.rayllanderson.kafka.product.avsc
+                        </product-topic-value>
+                        <pix>${project.basedir}/avro/com.rayllanderson.kafka.payment.pix.avsc</pix>
+                        <ted>${project.basedir}/avro/com.rayllanderson.kafka.payment.ted.avsc</ted>
+                    </subjects>
+                    <schemaTypes>
+                        <payment-topic-value>AVRO</payment-topic-value>
+                        <product-topic-value>AVRO</product-topic-value>
+                        <pix>AVRO</pix>
+                        <ted>AVRO</ted>
+                    </schemaTypes>
+                    <references>
+                        <payment-topic-value>
+                            <reference>
+                                <name>com.rayllanderson.kafka.payment.PIX</name>
+                                <subject>pix</subject>
+                            </reference>
+                            <reference>
+                                <name>com.rayllanderson.kafka.payment.TED</name>
+                                <subject>ted</subject>
+                            </reference>
+                        </payment-topic-value>
+                    </references>
+                    <outputDirectory>${project.basedir}/avro/</outputDirectory>
+                </configuration>
+                <goals>
+                    <goal>register</goal>
+                </goals>
+            </plugin>
+        </plugins>
+    </build>
+</project>
