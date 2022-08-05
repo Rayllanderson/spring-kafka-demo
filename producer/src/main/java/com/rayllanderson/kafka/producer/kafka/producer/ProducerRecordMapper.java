@@ -12,9 +12,12 @@ import java.time.Instant;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProducerRecordMapper {
 
+    private static final String SCHEMA_NAME_KEY = "schema_name";
+
     public static ProducerRecord<String, SpecificRecord> createProducerRecord(SpecificRecord schema, String topic, String key) {
         var producerRecord = new ProducerRecord<>(topic, null, Instant.now().toEpochMilli(), key, schema);
         producerRecord.headers().add(KafkaHeaders.CORRELATION_ID, key.getBytes(StandardCharsets.UTF_8));
+        producerRecord.headers().add(SCHEMA_NAME_KEY, schema.getSchema().getName().getBytes(StandardCharsets.UTF_8));
         return producerRecord;
     }
 }

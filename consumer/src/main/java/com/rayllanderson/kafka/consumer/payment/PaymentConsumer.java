@@ -10,11 +10,14 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 import static com.rayllanderson.kafka.consumer.payment.pix.PIX.fromRecord;
 import static com.rayllanderson.kafka.consumer.payment.ted.TED.fromRecord;
 
 @Slf4j
 @Component
+@Transactional
 @RequiredArgsConstructor
 @KafkaListener(topics = "${spring.kafka.payment.topic}",
         clientIdPrefix = "${spring.kafka.payment.client-id}",

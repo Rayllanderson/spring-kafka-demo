@@ -61,12 +61,14 @@
                         </product-topic-value>
                         <pix>${project.basedir}/avro/com.rayllanderson.kafka.payment.pix.avsc</pix>
                         <ted>${project.basedir}/avro/com.rayllanderson.kafka.payment.ted.avsc</ted>
+                        <boleto>${project.basedir}/avro/com.rayllanderson.kafka.payment.boleto.avsc</boleto>
                     </subjects>
                     <schemaTypes>
                         <payment-topic-value>AVRO</payment-topic-value>
                         <product-topic-value>AVRO</product-topic-value>
                         <pix>AVRO</pix>
                         <ted>AVRO</ted>
+                        <boleto>AVRO</boleto>
                     </schemaTypes>
                     <references>
                         <payment-topic-value>
@@ -77,6 +79,10 @@
                             <reference>
                                 <name>com.rayllanderson.kafka.payment.TED</name>
                                 <subject>ted</subject>
+                            </reference>
+                            <reference>
+                                <name>com.rayllanderson.kafka.payment.Boleto</name>
+                                <subject>boleto</subject>
                             </reference>
                         </payment-topic-value>
                     </references>

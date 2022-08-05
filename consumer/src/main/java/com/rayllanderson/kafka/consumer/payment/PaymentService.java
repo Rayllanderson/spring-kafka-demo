@@ -12,7 +12,6 @@ public class PaymentService {
 
     private final EntityManager entityManager;
 
-    @Transactional
     void process(Payment payment) {
         entityManager.persist(payment);
     }
