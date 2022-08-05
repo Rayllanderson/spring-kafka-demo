@@ -1,0 +1,5 @@
+[
+    "com.rayllanderson.kafka.payment.PIX",
+    "com.rayllanderson.kafka.payment.TED",
+    "com.rayllanderson.kafka.payment.Boleto"
+]

@@ -1,0 +1,11 @@
+{
+  "namespace": "com.rayllanderson.kafka.payment",
+  "type": "record",
+  "name": "PIX",
+  "fields": [
+    { "name": "id", "type": "string"},
+    { "name": "debitKey", "type": "string"},
+    { "name": "creditKey", "type": "string"},
+    { "name": "value", "type": "double"}
+  ]
+}

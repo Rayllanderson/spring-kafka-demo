@@ -1,0 +1,10 @@
+{
+  "namespace": "com.rayllanderson.kafka.payment",
+  "type": "record",
+  "name": "Boleto",
+  "fields": [
+    { "name": "id", "type": "string"},
+    { "name": "barCode", "type": "string"},
+    { "name": "value", "type": "double"}
+  ]
+}

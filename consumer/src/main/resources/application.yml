@@ -1,0 +1,47 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:localhost:9094}
+    properties:
+      schema:
+        registry:
+          url: ${SCHEMA_REGISTRY_URL:http://localhost:8081}
+      auto.register.schemas: false
+      use.latest.version: true
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:product-group-id}
+      client-id: product-client-id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      auto-offset-reset: ${KAFKA_AUTO-OFFSET-RESET:earliest}
+      fetch-min-size: 500
+      fetch-max-wait: 900
+      isolation-level: read_committed
+      max-poll-records: 10
+      enable-auto-commit: false
+      properties:
+        specific:
+          avro:
+            reader: true
+        spring:
+          deserializer:
+            key:
+              delegate:
+                class: org.apache.kafka.common.serialization.StringDeserializer
+            value:
+              delegate:
+                class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+    product:
+      topic: product-topic
+    payment:
+      topic: payment-topic
+      client-id: payment-id
