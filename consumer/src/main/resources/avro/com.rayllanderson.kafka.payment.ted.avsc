@@ -1,0 +1,12 @@
+{
+  "namespace": "com.rayllanderson.kafka.payment",
+  "type": "record",
+  "name": "TED",
+  "fields": [
+    { "name": "id", "type": "string"},
+    { "name": "debitAccount", "type": "string"},
+    { "name": "creditAccount", "type": "string"},
+    { "name": "value", "type": "double"},
+    { "name": "tax", "type": ["null", "double"], "default": null }
+  ]
+}

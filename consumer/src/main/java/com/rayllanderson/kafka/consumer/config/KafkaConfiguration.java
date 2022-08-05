@@ -1,6 +1,5 @@
 package com.rayllanderson.kafka.consumer.config;
 
-import com.rayllanderson.kafka.consumer.product.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +15,12 @@ public class KafkaConfiguration {
     private static final Logger log = LoggerFactory.getLogger(KafkaConfiguration.class);
 
     @Bean("customKafkaListenerContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<String, Product> kafkaListenerContainerFactory(ConsumerFactory<String, Product> productConsumerFactory) {
-        var factory = new ConcurrentKafkaListenerContainerFactory<String, Product>();
+    public ConcurrentKafkaListenerContainerFactory<Object, Object> kafkaListenerContainerFactory(ConsumerFactory<Object, Object> productConsumerFactory) {
+        var factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(productConsumerFactory);
         factory.getContainerProperties().setAckMode(MANUAL_IMMEDIATE);
         factory.setErrorHandler(errorHandler());
-        factory.setConcurrency(3);
+        factory.setConcurrency(2);
         return factory;
     }
 
